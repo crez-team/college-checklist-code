@@ -28,6 +28,32 @@ async function saveTaskToFirebase(task, userId) {
 }
 
 
+function signUp() {
+  const email = document.getElementById("email").value;
+  const password = document.getElementById("password").value;
+  createUserWithEmailAndPassword(auth, email, password)
+    .then((userCredential) => {
+      document.getElementById("auth-section").style.display = "none";
+      document.getElementById("checklist-section").style.display = "block";
+      const userId = userCredential.user.uid;
+      // load user-specific tasks here
+    })
+    .catch((error) => alert(error.message));
+}
+
+function signIn() {
+  const email = document.getElementById("email").value;
+  const password = document.getElementById("password").value;
+  signInWithEmailAndPassword(auth, email, password)
+    .then((userCredential) => {
+      document.getElementById("auth-section").style.display = "none";
+      document.getElementById("checklist-section").style.display = "block";
+      const userId = userCredential.user.uid;
+      // load user-specific tasks here
+    })
+    .catch((error) => alert(error.message));
+}
+
 
 document.addEventListener('DOMContentLoaded', function() {
     localStorage.removeItem('collegePrepTasks');
